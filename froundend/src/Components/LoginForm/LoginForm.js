@@ -13,13 +13,9 @@ function LoginForm() {
                         </div>
                         <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                             <form>
-
-
                                 <div className="divider d-flex align-items-center my-4">
-                                    <p className="lead fw-normal mb-0 me-3"><b>Sign In</b></p>
+                                <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign In</p>
                                 </div>
-
-
                                 <div className="form-outline mb-4">
                                     <input type="email" id="form3Example3" className="form-control form-control-lg"
                                         placeholder="Enter a valid email address" />
