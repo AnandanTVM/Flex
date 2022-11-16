@@ -4,10 +4,11 @@ const bcrypt = require('bcrypt')
 const { ObjectId, Db } = require('mongodb')
 const { response, json } = require('express')
 
+
 module.exports = {
 
     userRegister: async (userData, callback) => {
-        console.log(userData);
+
         return new Promise(async (resolve, reject) => {
 
 
@@ -39,7 +40,7 @@ module.exports = {
 
             } else {
 
-                resolve({ phoneFound: true })
+                resolve({ Email: true })
             }
         })
 
@@ -78,5 +79,25 @@ module.exports = {
 
 
     },
+    findUser: (email) => {
+        return new Promise(async (resolve, reject) => {
+            let user = await db.get().collection(collection.User_COLLECTION).findOne({ email: email })
+            console.log(user);
+            resolve(user)
+        })
+
+
+    },
+    updateQuote: (email, data) => {
+        return new Promise(async (resolve, reject) => {
+            let user = await db.get().collection(collection.User_COLLECTION).updateOne(
+                { email: email },
+                {
+                    $set: { quote: data }
+                })
+            console.log(user);
+            resolve(user)
+        })
+    }
 
 }

@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import '../Singup/Singup.css'
 function Singup() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [cPassword, setCPassword] = useState('')
-  const [data, setData] = useState('')
+  const navigate = useNavigate();
   const [dataErr, setDataErr] = useState('')
+
   async function registerUser(event) {
     event.preventDefault()
     const responce = await fetch('http://localhost:3001/api/register', {
@@ -20,20 +22,20 @@ function Singup() {
         password
       }),
     })
-    const data1 = await responce.json()
-    console.log(data1);
+    const data = await responce.json()
+    console.log(data);
 
     if (data.status === 'error') {
-      setDataErr(data1)
+      setDataErr(data)
     } else {
-      setData(data1)
+      navigate('/');
 
     }
   }
 
   return (
     <div>
-      <section className="vh-100" style={{ backgroundColor: " #eee" }}>
+      <section className="" style={{ backgroundColor: " #eee" }}>
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-lg-12 col-xl-11">
@@ -42,7 +44,7 @@ function Singup() {
                   <div className="row justify-content-center">
                     <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                       <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
-                      {data ? <p style={{ color: "green" }} className="text-center  fw-bold ">{data.status}</p> : " "}
+
                       {dataErr ? <p style={{ color: "red" }} className="text-center  fw-bold ">{dataErr.status}</p> : " "}
                       <form className="mx-1 mx-md-4" onSubmit={registerUser}>
 

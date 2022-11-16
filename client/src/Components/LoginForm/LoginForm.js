@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 function LoginForm() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
     async function loginUser(event) {
         event.preventDefault()
         console.log("started verifing");
@@ -20,6 +21,12 @@ function LoginForm() {
         })
         const data = await responce.json()
         console.log(data);
+        if (data.user) {
+            localStorage.setItem('token', data.user)
+            window.location.href = '/userHome'
+        } else {
+            setError('Invalid Email/Password..')
+        }
     }
 
     return (
@@ -35,7 +42,9 @@ function LoginForm() {
                             <form onSubmit={loginUser}>
                                 <div className="divider d-flex align-items-center my-4">
                                     <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign In</p>
+
                                 </div>
+                                {error ? <p style={{ color: "red" }} className="text-center fw-bold mb-5 mx-1 mx-md-4 mt-4">{error}</p> : " "}
                                 <div className="form-outline mb-4">
                                     <input type="email" id="form3Example3" value={email}
                                         onChange={(e) => { setEmail(e.target.value) }} className="form-control form-control-lg"
