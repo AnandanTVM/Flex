@@ -4,6 +4,7 @@ let router = express.Router();
 let adminHelper = require('../helpers/adminHelper')
 const jwt = require('jsonwebtoken')
 
+
 //loginAdmin
 
 router.post('/api/login', (req, res) => {
@@ -26,6 +27,35 @@ router.post('/api/login', (req, res) => {
         }
 
     })
+})
+
+///api/userDetails
+router.get('/api/userDetails', async (req, res) => {
+    const token = req.headers['x-access-token']
+
+    try {
+
+        const verified = jwt.verify(token, 'SKey5flwx')
+        console.log(verified);
+        if (verified) {
+
+            const user = await adminHelper.findallUser()
+            console.log(user);
+            return res.json({ status: 'ok', userDetails: user })
+
+        } else {
+            // Access Denied
+            return res.status(401).send(error);
+        }
+
+    } catch (error) {
+        console.log(error);
+        res.json({ status: 'error', error: 'invalid token' })
+
+    }
+
+
+
 })
 
 

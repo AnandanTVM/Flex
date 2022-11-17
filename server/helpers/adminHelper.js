@@ -37,7 +37,12 @@ module.exports = {
 
 
     },
-
+    findallUser: () => {
+        return new Promise(async (resolve, reject) => {
+            const userDetails = await db.get().collection(collection.User_COLLECTION).find().toArray()
+            resolve(userDetails)
+        })
+    }
 
 
 

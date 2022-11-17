@@ -4,11 +4,11 @@ import { Link, useNavigate } from 'react-router-dom'
 import jwt from 'jwt-decode'
 //redux
 
-import { useDispatch } from 'react-redux'
-import { addUserDetails } from '../../redux/user'
+// import { useDispatch } from 'react-redux'
+// import { addUserDetails } from '../../redux/userReducer'
 function LoginForm() {
     const navigate = useNavigate();
-    const dispatach = useDispatch()
+    // const dispatach = useDispatch()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
@@ -31,8 +31,10 @@ function LoginForm() {
         if (data.user) {
             localStorage.setItem('token', data.user)
             const user = jwt(data.user);
+            console.log(user);
+            localStorage.setItem('userDetails', user.name)
 
-            dispatach(addUserDetails(user))
+            //dispatach(addUserDetails(user))
             // window.location.href = '/userHome'
             navigate('/userHome');
         } else {

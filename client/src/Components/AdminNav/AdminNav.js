@@ -7,6 +7,7 @@ function AdminNav() {
     const navigate = useNavigate();
     const logout = () => {
         localStorage.removeItem('token')
+        localStorage.removeItem('userDetails')
         navigate('/admin')
     }
 
@@ -27,7 +28,7 @@ function AdminNav() {
                                 <Link className="nav-link active" aria-current="page" to="/adminHome">AddUser</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/adminHome">UserInfo</Link>
+                                <Link className="nav-link" to="/userinfo">UserInfo</Link>
                             </li>
 
 
@@ -39,7 +40,7 @@ function AdminNav() {
                         <li className="nav-item d-flex">
 
                             <span className="nav-link" style={{ color: "white" }} ><b><i>welcome &nbsp;
-                                {userDeatils[0] ? <span>{userDeatils[0].name} </span> : " "}
+                                {userDeatils ? <span>{userDeatils} </span> : " "}
                             </i></b></span>
                             <span className="nav-link" onClick={logout}>Logout</span>
                         </li>

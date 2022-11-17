@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router-dom'
 import jwt from 'jwt-decode'
 //redux
 
-import { useDispatch } from 'react-redux'
-import { addUserDetails } from '../../redux/user'
+// import { useDispatch } from 'react-redux'
+// import { addUserDetails } from '../../redux/userReducer'
 function AdminLogin() {
     const navigate = useNavigate();
-    const dispatach = useDispatch()
+    // const dispatach = useDispatch()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
@@ -31,8 +31,9 @@ function AdminLogin() {
         if (data.user) {
             localStorage.setItem('token', data.user)
             const user = jwt(data.user);
+            localStorage.setItem('userDetails', user.name)
 
-            dispatach(addUserDetails(user))
+            // dispatach(addUserDetails(user))
 
             //navigate('/userHome');
             navigate('/adminHome');

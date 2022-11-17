@@ -3,9 +3,12 @@ import { useNavigate, Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 function UserNav() {
     const { userDeatils } = useSelector((state) => state.user)
+    console.log(userDeatils);
     const navigate = useNavigate();
     const logout = () => {
         localStorage.removeItem('token')
+
+        localStorage.removeItem('userDetails')
         navigate('/')
 
     }
@@ -35,7 +38,7 @@ function UserNav() {
                         <li className="nav-item d-flex">
 
                             <span className="nav-link" style={{ color: "white" }} ><b><i>welcome &nbsp;
-                                {userDeatils[0] ? <span>{userDeatils[0].name} </span> : " "}
+                                {userDeatils[0] ? <span>{userDeatils[0]} </span> : " "}
                             </i></b></span>
                             <span className="nav-link" onClick={logout}>Logout</span>
                         </li>

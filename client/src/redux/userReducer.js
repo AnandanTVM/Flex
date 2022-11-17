@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+const userInfoFromStorage = localStorage.getItem("userDetails")
+console.log(userInfoFromStorage);
+
 const INITIAL_STATE = {
-    userDeatils: [],
+    userDeatils: [userInfoFromStorage],
     count: 0,
 }
 
@@ -9,15 +12,6 @@ const INITIAL_STATE = {
 const userSlice = createSlice({
     name: "user",
     initialState: INITIAL_STATE,
-    reducers: {
-        addUserDetails: (state, action) => {
-
-            state.userDeatils.push(action.payload)
-            console.log(state.userDeatils);
-        },
-
-    }
-
 
 })
 
