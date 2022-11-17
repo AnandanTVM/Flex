@@ -5,7 +5,7 @@ console.log(userInfoFromStorage);
 
 const INITIAL_STATE = {
     userDeatils: [userInfoFromStorage],
-    count: 0,
+    
 }
 
 
@@ -15,6 +15,6 @@ const userSlice = createSlice({
 
 })
 
-export const { addUserDetails } = userSlice.actions;
+
 //reducer export to a store 
 export default userSlice.reducer;

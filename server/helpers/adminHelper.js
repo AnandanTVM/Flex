@@ -42,7 +42,45 @@ module.exports = {
             const userDetails = await db.get().collection(collection.User_COLLECTION).find().toArray()
             resolve(userDetails)
         })
-    }
+    },
+    delectUser:(id)=>{
+        return new Promise((resolve, reject) => {
+
+            db.get().collection(collection.User_COLLECTION).deleteOne({ _id: ObjectId(id) }).then((data) => {
+               
+                console.log("sucess");
+                console.log(data);
+                resolve(data)
+
+            })
+        })
+
+    },
+
+    editUser:(data)=>{
+        return new Promise((resolve, reject) => {
+
+
+            db.get().collection(collection.User_COLLECTION).updateOne({
+                _id: ObjectId(data.id)
+            },
+                {
+                    $set: {
+                        email: data.email,
+                        name: data.name,
+                       
+
+                    }
+
+                }).then((response) => {
+                    resolve()
+                })
+
+        })
+
+
+    }     
+
 
 
 

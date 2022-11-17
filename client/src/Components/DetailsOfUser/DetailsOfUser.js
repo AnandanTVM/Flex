@@ -2,7 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import jwt from 'jwt-decode'
 
+
+//redux
+
+import {useDispatch} from 'react-redux'
+import {addUserDetails} from '../../redux/detailsREducer'
+
 function DetailsOfUser() {
+    const dispatch=useDispatch();
     const navigate = useNavigate()
     const [details, SetDetails] = useState([])
 
@@ -40,6 +47,29 @@ function DetailsOfUser() {
         }
     }, [navigate])
 
+  const  deleteuser= async (id)=>{
+    
+    const req = await fetch('http://localhost:3001/admin/api/delectUser', {
+        method:"POST",
+        headers: {
+            'x-access-token': localStorage.getItem('token'),
+            'Content-Type': 'application/json'
+        },
+        body:JSON.stringify({
+                 id
+        }),
+    })
+    const data = await req.json()
+
+    if (data.status === 'ok') {
+       // SetDetails(data.userDetails)
+       navigate('/adminHome')
+    } else {
+        alert(data.error)
+    }
+    console.log(id);
+
+}
     return (
         <div className='container'>
             <div>
@@ -59,7 +89,7 @@ function DetailsOfUser() {
                                     <th scope="row">{index + 1}</th>
                                     <td>{data.name}</td>
                                     <td>{data.email}</td>
-                                    <td></td>
+                                    <td><button onClick={()=>{dispatch(addUserDetails(data)); navigate('/editUser')}}  className="btn btn-primary">Edit</button> <button className="btn btn-danger" onClick={()=>deleteuser(data._id)}>Delect</button></td>
                                 </tr>
                             )
                         })
