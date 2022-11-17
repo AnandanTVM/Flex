@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import Footer from '../Components/Footer/Footer'
-import UserNav from '../Components/UserNav/UserNav'
+import React, { useEffect } from 'react'
+import { Footer, UserNav, CounterBtn } from '../Components'
 import { useNavigate } from 'react-router-dom';
 import jwt from 'jwt-decode'
 
+
+
 function Home() {
+
+
     const navigate = useNavigate();
-    const [userName, setUserName] = useState('')
+
 
     // async function populateQuote() {
     //     const req = await fetch('http://localhost:3001/api/quote', {
@@ -28,7 +31,8 @@ function Home() {
 
             const user = jwt(token);
 
-            setUserName(user.name);
+
+            // setUserName(user.name);
 
             if (!user) {
                 localStorage.removeItem('token')
@@ -41,11 +45,10 @@ function Home() {
         }
     }, [navigate])
 
-
     return (
         <div>
-            <UserNav uname={userName} />
-
+            <UserNav />
+            <CounterBtn />
             <Footer />
         </div>
     )

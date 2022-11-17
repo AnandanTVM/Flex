@@ -1,34 +1,30 @@
 import React, { useEffect } from 'react'
-import { LoginForm, LoginNav, Footer } from '../Components'
+import { AdminSingup, Footer, LoginNav } from '../Components'
 import { useNavigate } from 'react-router-dom';
 import jwt from 'jwt-decode'
 
-
-function Login() {
-
+function AdminLogin() {
     const navigate = useNavigate();
     useEffect(() => {
         const token = localStorage.getItem('token')
         if (token) {
 
             const user = jwt(token);
-            console.log("iam here");
-            console.log(user);
-            console.log(token);
+
             if (user) {
-                navigate('/userHome');
+                navigate('/adminHome');
             }
         } else {
-            navigate('/');
+            navigate('/admin');
         }
     }, [navigate])
     return (
         <div>
             <LoginNav />
-            <LoginForm />
+            <AdminSingup />
             <Footer />
         </div>
     )
 }
 
-export default Login
+export default AdminLogin

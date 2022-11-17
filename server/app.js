@@ -8,9 +8,11 @@ app.use(express.json())
 
 //routs 
 const userRouter = require('./routs/user');
+const adminRouter = require('./routs/admin');
 
 
 app.use('/', userRouter);
+app.use('/admin', adminRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));

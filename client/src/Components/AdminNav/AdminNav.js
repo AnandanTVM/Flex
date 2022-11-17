@@ -1,29 +1,33 @@
 import React from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-function UserNav() {
+function AdminNav() {
+
     const { userDeatils } = useSelector((state) => state.user)
     const navigate = useNavigate();
     const logout = () => {
         localStorage.removeItem('token')
-        navigate('/')
-
+        navigate('/admin')
     }
+
     return (
-        <div className=''>
+        <div>
             <nav className="navbar navbar-expand-lg navbar-dark  bg-primary">
                 <div className="container-fluid">
-                    <Link className="navbar-brand" to="/userHome">flex</Link>
+                    <Link className="navbar-brand" to="/adminHome">flex</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                                <Link className="nav-link active" aria-current="page" to="/userHome">Home</Link>
+                                <Link className="nav-link active" aria-current="page" to="/adminHome">Home</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/userHome">Profile</Link>
+                                <Link className="nav-link active" aria-current="page" to="/adminHome">AddUser</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/adminHome">UserInfo</Link>
                             </li>
 
 
@@ -46,4 +50,4 @@ function UserNav() {
     )
 }
 
-export default UserNav
+export default AdminNav
