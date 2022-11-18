@@ -33,6 +33,7 @@ function LoginForm() {
             const user = jwt(data.user);
             console.log(user);
             localStorage.setItem('userDetails', user.name)
+            localStorage.setItem('userEmail', user.email)
 
             //dispatach(addUserDetails(user))
             // window.location.href = '/userHome'
